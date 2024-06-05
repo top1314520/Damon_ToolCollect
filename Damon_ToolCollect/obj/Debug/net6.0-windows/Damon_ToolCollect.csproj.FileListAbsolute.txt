@@ -1,0 +1,11 @@
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\bin\Debug\net6.0-windows\Damon_ToolCollect.deps.json
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\bin\Debug\net6.0-windows\Damon_ToolCollect.dll
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\bin\Debug\net6.0-windows\Damon_ToolCollect.pdb
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.GeneratedMSBuildEditorConfig.editorconfig
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.AssemblyInfoInputs.cache
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.AssemblyInfo.cs
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.csproj.CoreCompileInputs.cache
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.dll
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\refint\Damon_ToolCollect.dll
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\Damon_ToolCollect.pdb
+G:\程序开发\MYProject\ServerCode\Project_OpenSource\Damon_ToolCollect\Damon_ToolCollect\obj\Debug\net6.0-windows\ref\Damon_ToolCollect.dll
