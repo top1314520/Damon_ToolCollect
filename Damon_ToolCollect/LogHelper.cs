@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Damon_ToolCollect
 {
+    /// <summary>
+    /// 日志帮助类
+    /// </summary>
     public class LogHelper
     {
         private string directoryPath = string.Empty;
@@ -33,7 +36,7 @@ namespace Damon_ToolCollect
             }
         }
         /// <summary>
-        /// 写入日志(Bytes)
+        /// 写入日志(Byte[])
         /// </summary>
         /// <param name="filename">文件名</param>
         /// <param name="data">日志内容</param>
@@ -89,6 +92,7 @@ namespace Damon_ToolCollect
         }
 
 
+        #region 私有
         private string GetDictionaryString(Dictionary<string, string> dataDictionary)
         {
             string result = "";
@@ -147,6 +151,7 @@ namespace Damon_ToolCollect
                 throw new Exception("BytesToHexString异常:" + ex.Message);
             }
             return hexString;
-        }
+        } 
+        #endregion
     }
 }
