@@ -9,6 +9,33 @@ namespace Damon_ToolCollect
     public class TimeHelper
     {
         /// <summary>
+        /// 2个时间相差的小时数
+        /// </summary>
+        /// <param name="DateTime1"></param>
+        /// <param name="DateTime2"></param>
+        /// <returns></returns>
+        public static double DateDiff(DateTime DateTime1, DateTime DateTime2)
+        {
+            double dateDiff = 0;
+            TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+            TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+            TimeSpan ts = ts1.Subtract(ts2).Duration();
+            dateDiff = ts.TotalHours;
+            return dateDiff;
+        }
+
+        /// <summary>
+        /// 用当前时间减去指定秒数再和当前时间比较大小(当前时间大于当前时间减去的秒数,则为true或者为false)
+        /// </summary>
+        /// <param name="second">秒数</param>
+        /// <returns></returns>
+        public static bool CompareTime(int second)
+        {
+            DateTime dt = DateTime.Now.AddSeconds(-second);
+            return dt < DateTime.Now;
+        }
+
+        /// <summary>
         /// 获取当前日期(如：2024-06-06)
         /// </summary>
         /// <returns></returns>
@@ -104,6 +131,19 @@ namespace Damon_ToolCollect
             DateTime utcDateTime = GetTime10Utc(timeStamp);
             // 然后转换为本地时间  
             return utcDateTime.ToLocalTime();
+        }
+        /// <summary>
+        /// 计算代码执行时间 返回秒
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static double GetRunTime(Action action)
+        {
+            DateTime start = DateTime.Now;
+            action();
+            DateTime end = DateTime.Now;
+            TimeSpan ts = end - start;
+            return ts.TotalSeconds;
         }
     }
 }

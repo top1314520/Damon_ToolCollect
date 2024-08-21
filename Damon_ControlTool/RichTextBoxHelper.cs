@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Damon_ToolCollect;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Damon_ToolCollect
+namespace Damon_ControlTool
 {
     /// <summary>
     /// 日志附件 委托
@@ -34,13 +35,13 @@ namespace Damon_ToolCollect
         /// <param name="countent"></param>
         /// <param name="fileName"></param>
         /// <param name="isLocal"></param>
-        public void Success(string countent,string fileName="",bool isLocal = true)
+        public void Success(string countent, string fileName = "", bool isLocal = true)
         {
-            if (isLocal) 
+            if (isLocal)
             {
                 if (string.IsNullOrEmpty(fileName))
                 {
-                    this._logHelper.logString(_tag+"_"+ TimeHelper.GetDate(), countent);
+                    this._logHelper.logString(_tag + "_" + TimeHelper.GetDate(), countent);
                 }
                 else
                 {
@@ -216,7 +217,7 @@ namespace Damon_ToolCollect
         /// </summary>
         /// <param name="color"></param>
         /// <param name="text"></param>
-        private  void LogAppendMethod(Color color, string text)
+        private void LogAppendMethod(Color color, string text)
         {
             if (this._richTextBox.Disposing || this._richTextBox.IsDisposed)
             {

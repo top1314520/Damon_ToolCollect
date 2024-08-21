@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,7 +106,7 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string ObjectToJson(object obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            return JsonConvert.SerializeObject(obj,Formatting.None);
         }
         /// <summary>
         /// Json字符串转对象

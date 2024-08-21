@@ -1,5 +1,7 @@
+using Damon_ControlTool;
 using Damon_ToolCollect;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace ToolCollect_Debug
@@ -150,6 +152,77 @@ namespace ToolCollect_Debug
             _richTextBoxHelper.Success("Json转Object==>" + ret_object, "统一调式");
             ret_str = JsonHelper.ObjectToJson(ret_object);
             _richTextBoxHelper.Success("Object转Json==>" + ret_str, "统一调式");
+        }
+        /// <summary>
+        /// Jobject帮助类
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void jobjectHelperToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string json = "{\"build\":{\"fingerprint\":\"LAUNCH\",\"hardware\":\"mt6765\",\"brand\":\"LAUNCH\",\"radio\":\"MOLY.LR12A\",\"bootloader\":\"172BD9E21DF1\",\"clientId\":\"android-google\",\"time\":\"1715766586\",\"packageVersionCode\":233515028,\"device\":\"X-431PADVII\",\"sdkVersion\":30,\"model\":\"X-431PADVII\",\"manufacturer\":\"Shenzhen\",\"product\":\"X-431PADVII\",\"otaInstalled\":false,\"settingClient\":[{\"id\":\"1\",\"pkgName\":\"android-google\"}],\"securityPatch\":\"2023-02-05\"},\"lastCheckinMs\":\"0\",\"roaming\":\"WIFI::\",\"userNumber\":0,\"phoneType\":2,\"configFlag\":{\"type\":5,\"fetch\":true,\"package\":\"com.google.android.gms\",\"class\":\"avcg\",\"fetchSystemUpdates\":true},\"isVoiceCapable\":1,\"networkType\":\"WIFI\",\"simCarrierId\":\"-1\"}";
+            _richTextBoxHelper.Success("Json实例数据==>" + json, "统一调式");
+            JObject jobject = JobjectHelper.GetJObject(json);
+            _richTextBoxHelper.Success("Json转JObject==>" + jobject, "统一调式");
+            string ret_str = JobjectHelper.GetJson(jobject);
+            _richTextBoxHelper.Success("JObject转Json==>" + ret_str, "统一调式");
+            ret_str = JobjectHelper.GetStringValue(jobject, "build", "fingerprint");
+            _richTextBoxHelper.Success("获取指定key(build.fingerprint)的字符串值==>" + ret_str, "统一调式");
+            int ret_int = JobjectHelper.GetValue<int>(jobject, "build", "packageVersionCode");
+            _richTextBoxHelper.Success("获取指定key(build.packageVersionCode)的int值==>" + ret_int, "统一调式");
+            List<object>? ret_list = JobjectHelper.GetListValue<object>(jobject, "build", "settingClient");
+            _richTextBoxHelper.Success("获取指定key(build.settingClient)的List<object>值==>" + JobjectHelper.GetJson((JObject)ret_list[0]), "统一调式");
+
+        }
+
+        private void stringHelperToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string str = "{\"build\":{\"fingerprint\":\"LAUNCH\",\"hardware\":\"mt6765\",\"brand\":\"LAUNCH\",\"radio\":\"MOLY.LR12A\",\"bootloader\":\"172BD9E21DF1\",\"clientId\":\"android-google\",\"time\":\"1715766586\",\"packageVersionCode\":233515028,\"device\":\"X-431PADVII\",\"sdkVersion\":30,\"model\":\"X-431PADVII\",\"manufacturer\":\"Shenzhen\",\"product\":\"X-431PADVII\",\"otaInstalled\":false,\"settingClient\":[{\"id\":\"1\",\"pkgName\":\"android-google\"}],\"securityPatch\":\"2023-02-05\"},\"lastCheckinMs\":\"0\",\"roaming\":\"WIFI::\",\"userNumber\":0,\"phoneType\":2,\"configFlag\":{\"type\":5,\"fetch\":true,\"package\":\"com.google.android.gms\",\"class\":\"avcg\",\"fetchSystemUpdates\":true},\"isVoiceCapable\":1,\"networkType\":\"WIFI\",\"simCarrierId\":\"-1\"}";
+            _richTextBoxHelper.Success("字符串操作实例数据==>" + str, "统一调式");
+            string ret_AddEscape = StringHelper.AddEscape(str);
+            _richTextBoxHelper.Success("添加转义符==>" + ret_AddEscape, "统一调式");
+            string ret_RemoveEscape = StringHelper.RemoveEscape(ret_AddEscape);
+            _richTextBoxHelper.Success("移除转义符==>" + ret_RemoveEscape, "统一调式");
+            string ret_GetBetween = StringHelper.GetBetween(str, "fingerprint\":\"", "\",");
+            _richTextBoxHelper.Success("字符串截取(fingerprint\\和\",之间的内容)==>" + ret_GetBetween, "统一调式");
+            string ret_SubstringBetweenMarkers = StringHelper.SubstringBetweenMarkers(str, "fingerprint\":\"", "\"");
+            _richTextBoxHelper.Success("字符串截取(fingerprint\":\"和\"之间的内容)==>" + ret_SubstringBetweenMarkers, "统一调式");
+        }
+
+        private void 增加转义符ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = Interaction.InputBox("请输入要转义的内容", "增加转义符", "", 100, 100);
+            string ret_str = StringHelper.AddEscape(output);
+            _richTextBoxHelper.Success("增加转义符==>" + ret_str, "统一调式");
+        }
+
+        private void 删除转义符ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = Interaction.InputBox("请输入要转义的内容", "删除转义符", "", 100, 100);
+            string ret_str = StringHelper.RemoveEscape(output);
+            _richTextBoxHelper.Success("删除转义符==>" + ret_str, "统一调式");
+        }
+
+        private void json格式化ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = Interaction.InputBox("请输入要格式化的内容", "Json格式化", "", 100, 100);
+            //object obj = JsonHelper.JsonToObject<object>(output);
+            string obj = JobjectHelper.FormatJson(output);
+            _richTextBoxHelper.Success("Json格式化==>" + obj, "统一调式");
+        }
+
+        private void json压缩ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = Interaction.InputBox("请输入要压缩的内容", "Json压缩", "", 100, 100);
+            string ret_str = JobjectHelper.GetJson(JsonHelper.JsonToObject<JObject>(output));
+            _richTextBoxHelper.Success("Json压缩==>" + ret_str, "统一调式");
+        }
+
+        private void convertHexStringsInJsonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = Interaction.InputBox("请输入要转换的内容", "Json中的十六进制字符串转换为正常字符串", "", 100, 100);
+            string ret_str = HexHelper.ConvertHexStringsInJson(output);
+            _richTextBoxHelper.Success("Json中的十六进制字符串转换为正常字符串==>" + ret_str, "统一调式");
         }
     }
 }

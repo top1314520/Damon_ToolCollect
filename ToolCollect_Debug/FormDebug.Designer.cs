@@ -44,20 +44,28 @@
             isNullOrEmptyToolStripMenuItem = new ToolStripMenuItem();
             isNumberToolStripMenuItem = new ToolStripMenuItem();
             timeHelperToolStripMenuItem = new ToolStripMenuItem();
+            stringHelperToolStripMenuItem = new ToolStripMenuItem();
+            jsonToolStripMenuItem = new ToolStripMenuItem();
+            jsonHelperToolStripMenuItem = new ToolStripMenuItem();
+            jobjectHelperToolStripMenuItem = new ToolStripMenuItem();
+            json格式化ToolStripMenuItem = new ToolStripMenuItem();
+            json压缩ToolStripMenuItem = new ToolStripMenuItem();
+            转义ToolStripMenuItem = new ToolStripMenuItem();
+            增加转义符ToolStripMenuItem = new ToolStripMenuItem();
+            删除转义符ToolStripMenuItem = new ToolStripMenuItem();
             richTextBox1 = new RichTextBox();
             statusStrip1 = new StatusStrip();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            jsonToolStripMenuItem = new ToolStripMenuItem();
-            jsonHelperToolStripMenuItem = new ToolStripMenuItem();
+            convertHexStringsInJsonToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { 日志ToolStripMenuItem, hexToolStripMenuItem, 基础类型ToolStripMenuItem, jsonToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { 日志ToolStripMenuItem, hexToolStripMenuItem, 基础类型ToolStripMenuItem, jsonToolStripMenuItem, 转义ToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1101, 25);
@@ -111,15 +119,15 @@
             // 
             // hexHelperToolStripMenuItem
             // 
-            hexHelperToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bytesToHexStringToolStripMenuItem, hexStringToBytesToolStripMenuItem });
+            hexHelperToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { bytesToHexStringToolStripMenuItem, hexStringToBytesToolStripMenuItem, convertHexStringsInJsonToolStripMenuItem });
             hexHelperToolStripMenuItem.Name = "hexHelperToolStripMenuItem";
-            hexHelperToolStripMenuItem.Size = new Size(137, 22);
+            hexHelperToolStripMenuItem.Size = new Size(180, 22);
             hexHelperToolStripMenuItem.Text = "HexHelper";
             // 
             // bytesToHexStringToolStripMenuItem
             // 
             bytesToHexStringToolStripMenuItem.Name = "bytesToHexStringToolStripMenuItem";
-            bytesToHexStringToolStripMenuItem.Size = new Size(178, 22);
+            bytesToHexStringToolStripMenuItem.Size = new Size(180, 22);
             bytesToHexStringToolStripMenuItem.Text = "BytesToHexString";
             bytesToHexStringToolStripMenuItem.ToolTipText = "字节数组转16进制字符串";
             bytesToHexStringToolStripMenuItem.Click += bytesToHexStringToolStripMenuItem_Click;
@@ -127,14 +135,14 @@
             // hexStringToBytesToolStripMenuItem
             // 
             hexStringToBytesToolStripMenuItem.Name = "hexStringToBytesToolStripMenuItem";
-            hexStringToBytesToolStripMenuItem.Size = new Size(178, 22);
+            hexStringToBytesToolStripMenuItem.Size = new Size(180, 22);
             hexStringToBytesToolStripMenuItem.Text = "HexStringToBytes";
             hexStringToBytesToolStripMenuItem.ToolTipText = "16进制字符串转字节数组";
             hexStringToBytesToolStripMenuItem.Click += hexStringToBytesToolStripMenuItem_Click;
             // 
             // 基础类型ToolStripMenuItem
             // 
-            基础类型ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { basicTypeHelperToolStripMenuItem, timeHelperToolStripMenuItem });
+            基础类型ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { basicTypeHelperToolStripMenuItem, timeHelperToolStripMenuItem, stringHelperToolStripMenuItem });
             基础类型ToolStripMenuItem.Name = "基础类型ToolStripMenuItem";
             基础类型ToolStripMenuItem.Size = new Size(68, 21);
             基础类型ToolStripMenuItem.Text = "基础类型";
@@ -143,7 +151,7 @@
             // 
             basicTypeHelperToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { isNullOrEmptyToolStripMenuItem, isNumberToolStripMenuItem });
             basicTypeHelperToolStripMenuItem.Name = "basicTypeHelperToolStripMenuItem";
-            basicTypeHelperToolStripMenuItem.Size = new Size(180, 22);
+            basicTypeHelperToolStripMenuItem.Size = new Size(173, 22);
             basicTypeHelperToolStripMenuItem.Text = "BasicTypeHelper";
             // 
             // isNullOrEmptyToolStripMenuItem
@@ -165,10 +173,73 @@
             // timeHelperToolStripMenuItem
             // 
             timeHelperToolStripMenuItem.Name = "timeHelperToolStripMenuItem";
-            timeHelperToolStripMenuItem.Size = new Size(180, 22);
+            timeHelperToolStripMenuItem.Size = new Size(173, 22);
             timeHelperToolStripMenuItem.Text = "TimeHelper";
             timeHelperToolStripMenuItem.ToolTipText = "输出所有的时间相关方法";
             timeHelperToolStripMenuItem.Click += timeHelperToolStripMenuItem_Click;
+            // 
+            // stringHelperToolStripMenuItem
+            // 
+            stringHelperToolStripMenuItem.Name = "stringHelperToolStripMenuItem";
+            stringHelperToolStripMenuItem.Size = new Size(173, 22);
+            stringHelperToolStripMenuItem.Text = "StringHelper";
+            stringHelperToolStripMenuItem.Click += stringHelperToolStripMenuItem_Click;
+            // 
+            // jsonToolStripMenuItem
+            // 
+            jsonToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { jsonHelperToolStripMenuItem, jobjectHelperToolStripMenuItem, json格式化ToolStripMenuItem, json压缩ToolStripMenuItem });
+            jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
+            jsonToolStripMenuItem.Size = new Size(46, 21);
+            jsonToolStripMenuItem.Text = "Json";
+            // 
+            // jsonHelperToolStripMenuItem
+            // 
+            jsonHelperToolStripMenuItem.Name = "jsonHelperToolStripMenuItem";
+            jsonHelperToolStripMenuItem.Size = new Size(156, 22);
+            jsonHelperToolStripMenuItem.Text = "JsonHelper";
+            jsonHelperToolStripMenuItem.Click += jsonHelperToolStripMenuItem_Click;
+            // 
+            // jobjectHelperToolStripMenuItem
+            // 
+            jobjectHelperToolStripMenuItem.Name = "jobjectHelperToolStripMenuItem";
+            jobjectHelperToolStripMenuItem.Size = new Size(156, 22);
+            jobjectHelperToolStripMenuItem.Text = "JobjectHelper";
+            jobjectHelperToolStripMenuItem.Click += jobjectHelperToolStripMenuItem_Click;
+            // 
+            // json格式化ToolStripMenuItem
+            // 
+            json格式化ToolStripMenuItem.Name = "json格式化ToolStripMenuItem";
+            json格式化ToolStripMenuItem.Size = new Size(156, 22);
+            json格式化ToolStripMenuItem.Text = "Json格式化";
+            json格式化ToolStripMenuItem.Click += json格式化ToolStripMenuItem_Click;
+            // 
+            // json压缩ToolStripMenuItem
+            // 
+            json压缩ToolStripMenuItem.Name = "json压缩ToolStripMenuItem";
+            json压缩ToolStripMenuItem.Size = new Size(156, 22);
+            json压缩ToolStripMenuItem.Text = "Json压缩";
+            json压缩ToolStripMenuItem.Click += json压缩ToolStripMenuItem_Click;
+            // 
+            // 转义ToolStripMenuItem
+            // 
+            转义ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 增加转义符ToolStripMenuItem, 删除转义符ToolStripMenuItem });
+            转义ToolStripMenuItem.Name = "转义ToolStripMenuItem";
+            转义ToolStripMenuItem.Size = new Size(44, 21);
+            转义ToolStripMenuItem.Text = "转义";
+            // 
+            // 增加转义符ToolStripMenuItem
+            // 
+            增加转义符ToolStripMenuItem.Name = "增加转义符ToolStripMenuItem";
+            增加转义符ToolStripMenuItem.Size = new Size(136, 22);
+            增加转义符ToolStripMenuItem.Text = "增加转义符";
+            增加转义符ToolStripMenuItem.Click += 增加转义符ToolStripMenuItem_Click;
+            // 
+            // 删除转义符ToolStripMenuItem
+            // 
+            删除转义符ToolStripMenuItem.Name = "删除转义符ToolStripMenuItem";
+            删除转义符ToolStripMenuItem.Size = new Size(136, 22);
+            删除转义符ToolStripMenuItem.Text = "删除转义符";
+            删除转义符ToolStripMenuItem.Click += 删除转义符ToolStripMenuItem_Click;
             // 
             // richTextBox1
             // 
@@ -214,19 +285,13 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 64);
             // 
-            // jsonToolStripMenuItem
+            // convertHexStringsInJsonToolStripMenuItem
             // 
-            jsonToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { jsonHelperToolStripMenuItem });
-            jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
-            jsonToolStripMenuItem.Size = new Size(46, 21);
-            jsonToolStripMenuItem.Text = "Json";
-            // 
-            // jsonHelperToolStripMenuItem
-            // 
-            jsonHelperToolStripMenuItem.Name = "jsonHelperToolStripMenuItem";
-            jsonHelperToolStripMenuItem.Size = new Size(180, 22);
-            jsonHelperToolStripMenuItem.Text = "JsonHelper";
-            jsonHelperToolStripMenuItem.Click += jsonHelperToolStripMenuItem_Click;
+            convertHexStringsInJsonToolStripMenuItem.Name = "convertHexStringsInJsonToolStripMenuItem";
+            convertHexStringsInJsonToolStripMenuItem.Size = new Size(220, 22);
+            convertHexStringsInJsonToolStripMenuItem.Text = "ConvertHexStringsInJson";
+            convertHexStringsInJsonToolStripMenuItem.ToolTipText = "Json中的十六进制字符串转换为正常字符串";
+            convertHexStringsInJsonToolStripMenuItem.Click += convertHexStringsInJsonToolStripMenuItem_Click;
             // 
             // FormDebug
             // 
@@ -276,5 +341,13 @@
         private ToolStripMenuItem timeHelperToolStripMenuItem;
         private ToolStripMenuItem jsonToolStripMenuItem;
         private ToolStripMenuItem jsonHelperToolStripMenuItem;
+        private ToolStripMenuItem jobjectHelperToolStripMenuItem;
+        private ToolStripMenuItem stringHelperToolStripMenuItem;
+        private ToolStripMenuItem 转义ToolStripMenuItem;
+        private ToolStripMenuItem 增加转义符ToolStripMenuItem;
+        private ToolStripMenuItem 删除转义符ToolStripMenuItem;
+        private ToolStripMenuItem json格式化ToolStripMenuItem;
+        private ToolStripMenuItem json压缩ToolStripMenuItem;
+        private ToolStripMenuItem convertHexStringsInJsonToolStripMenuItem;
     }
 }

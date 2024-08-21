@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,55 @@ namespace Damon_ToolCollect
                 throw new Exception("HexStringToBytes失败:" + ex.Message);
             }
             return bytes;
+        }
+
+        /// <summary>
+        /// 十六进制字符串转换为正常字符串
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        public static string HexStringToString(string hex)
+        {
+            byte[] bytes = HexStringToBytes(hex);
+            return Encoding.UTF8.GetString(bytes);
+        }
+
+        /// <summary>
+        /// Json中的十六进制字符串转换为正常字符串
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static string ConvertHexStringsInJson(string json)
+        {
+            // 解析JSON到JObject  
+            JObject jsonObject = JObject.Parse(json);
+
+            // 遍历所有属性  
+            foreach (JProperty prop in jsonObject.Properties())
+            {
+                string strValue = prop.Value.ToString();
+
+                // 检查字符串是否可能是十六进制  
+                if (strValue.Length > 0 && strValue.Length % 2 == 0 && strValue.All(c => (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
+                {
+                    // 尝试将十六进制字符串转换为字节数组  
+                    try
+                    {
+                        string decodedString = HexStringToString(strValue);
+                        if (!StringHelper.IsMessyCode(decodedString)) 
+                        {
+                            // 更新JSON对象的属性值  
+                            prop.Value = JToken.FromObject(StringHelper.ReplaceSpecialChar(decodedString));
+                        }
+                    }
+                    catch 
+                    {
+                        //异常就不修改
+                    }
+                }
+            }
+            // 将更新后的JObject转换回JSON字符串  
+            return jsonObject.ToString();
         }
     }
 }

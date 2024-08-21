@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Damon_ControlTool\Damon_ControlTool.csproj" />
     <ProjectReference Include="..\Damon_ToolCollect\Damon_ToolCollect.csproj" />
   </ItemGroup>
 
