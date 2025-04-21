@@ -17,8 +17,8 @@ namespace Damon_ToolCollect.FormatClass
         public string serialno { get; set; } = "";
         public string service_time { get; set; } = "";
         public string extend { get; set; } = "";
-        public object data { get; set; }
-        public static string GetSynReturnModels(bool success, string code, string message, string serial_no, object data = null)
+        public object data { get; set; } = "";
+        public static string GetSynReturnModels(bool success, string code, string message, string serial_no, object data)
         {
             SynReturnJsonModels model = new SynReturnJsonModels();
             model.Success = success;

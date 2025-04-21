@@ -8,7 +8,9 @@ namespace ToolCollect_Debug
 {
     public partial class FormDebug : Form
     {
+#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         public FormDebug()
+#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         {
             InitializeComponent();
         }
@@ -61,7 +63,7 @@ namespace ToolCollect_Debug
         /// <param name="e"></param>
         private void isNullOrEmptyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            object obj = null;
+            object? obj = null;
             string ret_str = BasicTypeHelper.IsNullOrEmpty(obj).ToString();
             _richTextBoxHelper.Success("对象null=>" + ret_str, "统一调式");
             ret_str = BasicTypeHelper.IsNullOrEmpty("123").ToString();
@@ -148,9 +150,13 @@ namespace ToolCollect_Debug
             _richTextBoxHelper.Success("节点name的值object==>" + ret_obj, "统一调式");
             string ret_str = JsonHelper.GetJsonNodeValueString(json, nodeName);
             _richTextBoxHelper.Success("节点name的值string==>" + ret_str, "统一调式");
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
             object ret_object = JsonHelper.JsonToObject<object>(json);
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
             _richTextBoxHelper.Success("Json转Object==>" + ret_object, "统一调式");
+#pragma warning disable CS8604 // 引用类型参数可能为 null。
             ret_str = JsonHelper.ObjectToJson(ret_object);
+#pragma warning restore CS8604 // 引用类型参数可能为 null。
             _richTextBoxHelper.Success("Object转Json==>" + ret_str, "统一调式");
         }
         /// <summary>
@@ -171,7 +177,9 @@ namespace ToolCollect_Debug
             int ret_int = JobjectHelper.GetValue<int>(jobject, "build", "packageVersionCode");
             _richTextBoxHelper.Success("获取指定key(build.packageVersionCode)的int值==>" + ret_int, "统一调式");
             List<object>? ret_list = JobjectHelper.GetListValue<object>(jobject, "build", "settingClient");
+#pragma warning disable CS8602 // 解引用可能出现空引用。
             _richTextBoxHelper.Success("获取指定key(build.settingClient)的List<object>值==>" + JobjectHelper.GetJson((JObject)ret_list[0]), "统一调式");
+#pragma warning restore CS8602 // 解引用可能出现空引用。
 
         }
 
@@ -214,7 +222,9 @@ namespace ToolCollect_Debug
         private void json压缩ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string output = Interaction.InputBox("请输入要压缩的内容", "Json压缩", "", 100, 100);
+#pragma warning disable CS8604 // 引用类型参数可能为 null。
             string ret_str = JobjectHelper.GetJson(JsonHelper.JsonToObject<JObject>(output));
+#pragma warning restore CS8604 // 引用类型参数可能为 null。
             _richTextBoxHelper.Success("Json压缩==>" + ret_str, "统一调式");
         }
 
@@ -223,6 +233,11 @@ namespace ToolCollect_Debug
             string output = Interaction.InputBox("请输入要转换的内容", "Json中的十六进制字符串转换为正常字符串", "", 100, 100);
             string ret_str = HexHelper.ConvertHexStringsInJson(output);
             _richTextBoxHelper.Success("Json中的十六进制字符串转换为正常字符串==>" + ret_str, "统一调式");
+        }
+
+        private void protobufToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

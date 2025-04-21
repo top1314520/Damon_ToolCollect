@@ -10,6 +10,23 @@ namespace Damon_ToolCollect
     public class HexHelper
     {
         /// <summary>
+        /// 检查是否是十六进制字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsHexString(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return false;
+            foreach (char c in str)
+            {
+                if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
         /// 字节数组转16进制字符串
         /// </summary>
         /// <param name="bytes"></param>
@@ -42,7 +59,7 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static byte[] HexStringToBytes(string hex)
         {
-            byte[] bytes = null;
+            byte[]? bytes = null;
             hex = hex.Replace(" ", "");
             try
             {
@@ -70,6 +87,16 @@ namespace Damon_ToolCollect
         {
             byte[] bytes = HexStringToBytes(hex);
             return Encoding.UTF8.GetString(bytes);
+        }
+        /// <summary>
+        /// 正常字符串转换为十六进制字符串
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <returns></returns>
+        public static string StringToHexString(string str)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
+            return BytesToHexString(bytes);
         }
 
         /// <summary>

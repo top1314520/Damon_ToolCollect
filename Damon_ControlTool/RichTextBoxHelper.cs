@@ -203,7 +203,7 @@ namespace Damon_ControlTool
                     this._logHelper.logString(fileName, countent);
                 }
             }
-            if (color == null)
+            if (color.Name.Length <= 0)
             {
                 color = Color.Cyan; //青色
             }

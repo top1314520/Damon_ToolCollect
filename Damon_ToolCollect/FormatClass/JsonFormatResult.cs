@@ -12,9 +12,9 @@ namespace Damon_ToolCollect.FormatClass
     /// </summary>
     public class JsonFormatResult
     {
-        public string success { get; set; }
+        public string success { get; set; } = "";
         public int code { get; set; }
-        public string message { get; set; }
+        public string message { get; set; } = "";
         public int num { get; set; }
         public object? data { get; set; }
 

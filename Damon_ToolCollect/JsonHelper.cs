@@ -65,14 +65,16 @@ namespace Damon_ToolCollect
                 var jObject = JsonConvert.DeserializeObject(json) as JObject;
                 if (jObject == null)
                 {
-                    return null;
+                    return "";
                 }
                 var jToken = jObject.SelectToken(nodeName);
+#pragma warning disable CS8603 // 可能返回 null 引用。
                 return jToken;
+#pragma warning restore CS8603 // 可能返回 null 引用。
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw new Exception("GetJsonNodeValue=>" + ex);
             }
         }
         /// <summary>
@@ -88,14 +90,16 @@ namespace Damon_ToolCollect
                 var jObject = JsonConvert.DeserializeObject(json) as JObject;
                 if (jObject == null)
                 {
-                    return null;
+                    return "";
                 }
                 var jToken = jObject.SelectToken(nodeName);
+#pragma warning disable CS8602 // 解引用可能出现空引用。
                 return jToken.ToString();
+#pragma warning restore CS8602 // 解引用可能出现空引用。
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw new Exception("GetJsonNodeValueString=>" + ex);
             }
         }
 

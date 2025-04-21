@@ -52,7 +52,7 @@ namespace Damon_ToolCollect
         /// <param name="socksProxy"></param>
         /// <param name="debugFlag"></param>
         /// <returns></returns>
-        public static string HttpClientPostFormData(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, Dictionary<string, string> forms, IWebProxy socksProxy = null, int debugFlag = 0)
+        public static string HttpClientPostFormData(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, Dictionary<string, string> forms, IWebProxy? socksProxy = null, int debugFlag = 0)
         {
             HttpClientHandler handler;
             if (socksProxy != null)
@@ -137,7 +137,7 @@ namespace Damon_ToolCollect
         /// <param name="socksProxy">代理信息</param>
         /// <param name="debugFlag">是否启用调试代理1启用</param>
         /// <returns></returns>
-        public static string HttpClientPost(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, HttpContent forms, Dictionary<string, string> parameter, IWebProxy socksProxy = null, int debugFlag = 0)
+        public static string HttpClientPost(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, HttpContent forms, Dictionary<string, string> parameter, IWebProxy? socksProxy = null, int debugFlag = 0)
         {
             HttpClientHandler handler;
             if (socksProxy != null)
@@ -220,7 +220,7 @@ namespace Damon_ToolCollect
         /// <param name="socksProxy">代理信息</param>
         /// <param name="debugFlag">是否启用调试代理1启用</param>
         /// <returns></returns>
-        public static string HttpClientGet(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, IWebProxy socksProxy = null, int debugFlag = 0)
+        public static string HttpClientGet(string url, Dictionary<string, string> headers, Dictionary<string, string> cookies, IWebProxy? socksProxy = null, int debugFlag = 0)
         {
             HttpClientHandler handler;
             HttpReponseResult hTTPReponseResult = new HttpReponseResult();
@@ -306,8 +306,8 @@ namespace Damon_ToolCollect
                         int num = array[0].IndexOf("=");
                         string key = array[0].Substring(0, num);
                         string value = array[0].Substring(num + 1);
-                        string value2 = "";
-                        if (!hTTPReponseResult.setCookie.TryGetValue(key, out value2))
+                        //string value2 = "";
+                        if (!hTTPReponseResult.setCookie.TryGetValue(key, out var value2))
                         {
                             hTTPReponseResult.setCookie.Add(key, value);
                         }

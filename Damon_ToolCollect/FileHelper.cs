@@ -53,10 +53,12 @@ namespace Damon_ToolCollect
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
                 {
                     string line = string.Empty;
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
                     while ((line = reader.ReadLine()) != null)
                     {
                         list.Add(line);
                     }
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
                 }
             }
             return list;
@@ -74,6 +76,7 @@ namespace Damon_ToolCollect
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(filePath))
                 {
                     string line = string.Empty;
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
                     while ((line = reader.ReadLine()) != null)
                     {
                         if (!string.IsNullOrEmpty(line.Trim()))
@@ -81,6 +84,7 @@ namespace Damon_ToolCollect
                             list.Add(line);
                         }
                     }
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
                 }
             }
             return list;

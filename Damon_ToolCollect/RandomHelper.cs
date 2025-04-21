@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,10 +86,7 @@ namespace Damon_ToolCollect
         {
             //创建一个字节数组来保存随机值  
             byte[] randomNumber = new byte[length];
-            //创建RNGCryptoServiceProvider的新实例
-            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
-            //用随机值填充数组
-            rng.GetBytes(randomNumber);
+            randomNumber = RandomNumberGenerator.GetBytes(length);
             //将字节转换为uint值，使模数运算更容易
             uint randomResult = 0x0;
             for (int i = 0; i < length; i++)

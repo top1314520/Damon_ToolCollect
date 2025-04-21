@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Y8cyVg2siOw=",
+  "dgSpecHash": "xlfV/2LdAh0=",
   "success": true,
   "projectFilePath": "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\top\\.nuget\\packages\\google.protobuf\\3.30.2\\google.protobuf.3.30.2.nupkg.sha512",
     "C:\\Users\\top\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []

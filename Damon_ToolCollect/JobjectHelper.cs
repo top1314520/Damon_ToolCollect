@@ -21,17 +21,26 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static bool IsExistKey(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
-                if (jToken == null)
+                JObject jobject = JObject.Parse(jsonStr);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
                 {
-                    return false;
+#pragma warning disable CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    if (jToken == null)
+                    {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception("IsExistKey=>" + ex);
+            }
         }
 
         /// <summary>
@@ -42,14 +51,25 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JObject RemoveNode(JObject jobject, params string[] keyNames)
         {
-            JObject jObject = jobject;
-            JToken jToken = jObject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JObject jObject = jobject;
+                JToken jToken = jObject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+#pragma warning disable CS8602 // 解引用可能出现空引用。
+                jToken.Parent.Remove();
+#pragma warning restore CS8602 // 解引用可能出现空引用。
+                return jObject;
             }
-            jToken.Parent.Remove();
-            return jObject;
+            catch (Exception ex)
+            {
+                throw new Exception("RemoveNode=>" + ex);
+            }
         }
         
 
@@ -60,7 +80,18 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string FormatJson(string json)
         {
-            return JToken.Parse(json).ToString();
+            try
+            {
+                if (string.IsNullOrEmpty(json))
+                {
+                    return "";
+                }
+                return JToken.Parse(json).ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("FormatJson=>" + ex);
+            }
         }
 
         /// <summary>
@@ -70,7 +101,14 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JObject GetJObject(string json)
         {
-            return JObject.Parse(json);
+            try
+            {
+                return JObject.Parse(json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("GetJObject=>" + ex);
+            }
         }
         /// <summary>
         /// Jobject转Json字符串格式化压缩
@@ -80,7 +118,14 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string GetJson(JObject jobject, bool isFormat = true)
         {
-            return jobject.ToString(isFormat ? Newtonsoft.Json.Formatting.None : Newtonsoft.Json.Formatting.Indented);
+            try
+            {
+                return jobject.ToString(isFormat ? Newtonsoft.Json.Formatting.None : Newtonsoft.Json.Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("GetJson_2=>" + ex);
+            }
         }
         /// <summary>
         /// Jobject转Json字符串格式化压缩
@@ -90,8 +135,19 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string GetJson(string jsonStr, bool isFormat = true)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            return jobject.ToString(isFormat ? Newtonsoft.Json.Formatting.None : Newtonsoft.Json.Formatting.Indented);
+            try
+            {
+                if (string.IsNullOrEmpty(jsonStr))
+                {
+                    return "";
+                }
+                JObject jobject = JObject.Parse(jsonStr);
+                return jobject.ToString(isFormat ? Newtonsoft.Json.Formatting.None : Newtonsoft.Json.Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("GetJson_2=>" + ex);
+            }
         }
 
         /// <summary>
@@ -102,12 +158,19 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string GetStringValue(JObject jobject, params string[] keyNames)
         {
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return "";
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return "";
+                }
+                return value.ToString();
             }
-            return value.ToString();
+            catch (Exception ex)
+            {
+                throw new Exception("GetStringValue_2=>" + ex);
+            }
         }
         /// <summary>
         /// 获取字符串值
@@ -117,13 +180,20 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string GetStringValue(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return "";
+                JObject jobject = JObject.Parse(jsonStr);
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return "";
+                }
+                return value.ToString();
             }
-            return value.ToString();
+            catch (Exception ex)
+            {
+                throw new Exception("GetStringValue_2=>" + ex);
+            }
         }
 
 
@@ -136,12 +206,19 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static T GetValue<T>(JObject jobject, params string[] keyNames) where T : struct
         {
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return default(T);
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return default(T);
+                }
+                return value.ToObject<T>();
             }
-            return value.ToObject<T>();
+            catch (Exception ex)
+            {
+                throw new Exception("GetValue<T>_2=>" + ex);
+            }
         }
         /// <summary>
         /// 获取指定类型的值
@@ -152,13 +229,20 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static T GetValue<T>(string jsonStr, params string[] keyNames) where T : struct
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return default(T);
+                JObject jobject = JObject.Parse(jsonStr);
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return default(T);
+                }
+                return value.ToObject<T>();
             }
-            return value.ToObject<T>();
+            catch (Exception ex)
+            {
+                throw new Exception("GetValue<T>_2=>" + ex);
+            }
         }
 
         /// <summary>
@@ -170,12 +254,16 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static List<T>? GetListValue<T>(JObject jobject, params string[] keyNames) where T : class
         {
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return new List<T>();
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return new List<T>();
+                }
+                return value.ToObject<List<T>>();
             }
-            return value.ToObject<List<T>>();
+            catch (Exception ex) { throw new Exception("GetListValue<T>_2=>" + ex); }
         }
         /// <summary>
         /// 获取List指定类型的值
@@ -186,13 +274,17 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static List<T>? GetListValue<T>(string jsonStr, params string[] keyNames) where T : class
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return new List<T>();
+                JObject jobject = JObject.Parse(jsonStr);
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return new List<T>();
+                }
+                return value.ToObject<List<T>>();
             }
-            return value.ToObject<List<T>>();
+            catch (Exception ex) { throw new Exception("GetListValue<T>_2=>" + ex); }
         }
 
         /// <summary>
@@ -203,26 +295,36 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JObject? GetJObjectValue(JObject jobject, params string[] keyNames)
         {
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                JObject jObject;
+#pragma warning disable CS8602, CS8600 // 解引用可能出现空引用。
+                switch (jToken.Type)
+                {
+                    case JTokenType.Object:
+                        jObject = (JObject)jToken;
+                        break;
+                    case JTokenType.Array:
+                        jObject = (JObject)jToken[0];
+                        break;
+                    default:
+                        //抛出异常
+                        throw new Exception("获取JObject失败");
+                }
+#pragma warning restore CS8602, CS8600 // 解引用可能出现空引用。
+                return jObject;
             }
-            JObject jObject = null;
-            if (jToken.Type == JTokenType.Object)
+            catch (Exception ex)
             {
-                jObject = (JObject)jToken;
+                throw new Exception("GetJObjectValue_2=>" + ex);
             }
-            else if(jToken.Type == JTokenType.Array)
-            {
-                jObject = (JObject)jToken[0];
-            }
-            else 
-            {
-                //抛出异常
-                throw new Exception("获取JObject失败");
-            }
-            return jObject;
         }
         /// <summary>
         /// 获取Jobect指定类型的值
@@ -232,27 +334,34 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JObject? GetJObjectValue(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JObject jobject = JObject.Parse(jsonStr);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                JObject jObject;
+#pragma warning disable CS8602, CS8600 // 解引用可能出现空引用。
+                switch (jToken.Type)
+                {
+                    case JTokenType.Object:
+                        jObject = (JObject)jToken;
+                        break;
+                    case JTokenType.Array:
+                        jObject = (JObject)jToken[0];
+                        break;
+                    default:
+                        //抛出异常
+                        throw new Exception("获取JObject失败");
+                }
+#pragma warning restore CS8602, CS8600 // 解引用可能出现空引用。
+                return jObject;
             }
-            JObject jObject = null;
-            if (jToken.Type == JTokenType.Object)
-            {
-                jObject = (JObject)jToken;
-            }
-            else if (jToken.Type == JTokenType.Array)
-            {
-                jObject = (JObject)jToken[0];
-            }
-            else
-            {
-                //抛出异常
-                throw new Exception("获取JObject失败");
-            }
-            return jObject;
+            catch (Exception ex){ throw new Exception("GetJObjectValue_2=>" + ex); }
         }
 
         /// <summary>
@@ -264,22 +373,30 @@ namespace Damon_ToolCollect
         /// <exception cref="Exception"></exception>
         public static JArray? GetJArrayValue(JObject jobject, params string[] keyNames)
         {
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                JArray jArray;
+#pragma warning disable CS8602 // 解引用可能出现空引用。
+                switch (jToken.Type)
+                {
+                    case JTokenType.Array:
+                        jArray = (JArray)jToken;
+                        break;
+                    default:
+                        //抛出异常
+                        throw new Exception("获取JArray失败");
+                }
+#pragma warning restore CS8602 // 解引用可能出现空引用。
+                return jArray;
             }
-            JArray jArray = null;
-            if (jToken.Type == JTokenType.Array)
-            {
-                jArray = (JArray)jToken;
-            }
-            else
-            {
-                //抛出异常
-                throw new Exception("获取JArray失败");
-            }
-            return jArray;
+            catch (Exception ex) { throw new Exception("GetJArrayValue_2=>" + ex); }
         }
         /// <summary>
         /// 获取JArray指定类型的值
@@ -290,23 +407,34 @@ namespace Damon_ToolCollect
         /// <exception cref="Exception"></exception>
         public static JArray? GetJArrayValue(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JObject jobject = JObject.Parse(jsonStr);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                JArray jArray;
+#pragma warning disable CS8602 // 解引用可能出现空引用。
+                switch (jToken.Type)
+                {
+                    case JTokenType.Array:
+                        jArray = (JArray)jToken;
+                        break;
+                    default:
+                        //抛出异常
+                        throw new Exception("获取JArray失败");
+                }
+#pragma warning restore CS8602 // 解引用可能出现空引用。
+                return jArray;
             }
-            JArray jArray = null;
-            if (jToken.Type == JTokenType.Array)
+            catch (Exception ex)
             {
-                jArray = (JArray)jToken;
+                throw new Exception("GetJArrayValue_2=>" + ex);
             }
-            else
-            {
-                //抛出异常
-                throw new Exception("获取JArray失败");
-            }
-            return jArray;
         }
 
         /// <summary>
@@ -318,12 +446,19 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static T? GetEntityValue<T>(JObject jobject, params string[] keyNames) where T : class
         {
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return null;
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return null;
+                }
+                return value.ToObject<T>();
             }
-            return value.ToObject<T>();
+            catch (Exception ex)
+            {
+                throw new Exception("GetEntityValue<T>_2=>" + ex);
+            }
         }
         /// <summary>
         /// 获取实体指定类型的值
@@ -334,13 +469,20 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static T? GetEntityValue<T>(string jsonStr, params string[] keyNames) where T : class
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            var value = GetNode(jobject, keyNames);
-            if (value == null)
+            try
             {
-                return null;
+                JObject jobject = JObject.Parse(jsonStr);
+                var value = GetNode(jobject, keyNames);
+                if (value == null)
+                {
+                    return null;
+                }
+                return value.ToObject<T>();
             }
-            return value.ToObject<T>();
+            catch (Exception ex)
+            {
+                throw new Exception("GetEntityValue<T>_2=>" + ex);
+            }
         }
 
         /// <summary>
@@ -351,12 +493,21 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JToken? GetNode(JObject jobject, params string[] keyNames)
         {
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning disable CS8600, CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                return jToken;
             }
-            return jToken;
+            catch (Exception ex)
+            {
+                throw new Exception("GetNode_2=>" + ex);
+            }
         }
         /// <summary>
         /// 获取多级子节点
@@ -366,13 +517,22 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static JToken? GetNode(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            JToken jToken = jobject;
-            for (int i = 0; i < keyNames.Length; i++)
+            try
             {
-                jToken = GetNextNode(jToken, keyNames[i]);
+                JObject jobject = JObject.Parse(jsonStr);
+                JToken jToken = jobject;
+                for (int i = 0; i < keyNames.Length; i++)
+                {
+#pragma warning disable CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                    jToken = GetNextNode(jToken, keyNames[i]);
+#pragma warning restore CS8600,CS8604 // 将 null 字面量或可能为 null 的值转换为非 null 类型。
+                }
+                return jToken;
             }
-            return jToken;
+            catch (Exception ex)
+            {
+                throw new Exception("GetNode_2=>" + ex);
+            }
         }
 
         /// <summary>
@@ -382,23 +542,30 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JobjectToDataTable(JObject jobject)
         {
-            DataTable dt = new DataTable();
-            if (jobject != null)
+            try
             {
-                foreach (JToken item in jobject.Children())
+                DataTable dt = new DataTable();
+                if (jobject != null)
                 {
-                    JProperty jProperty = item as JProperty;
-                    dt.Columns.Add(jProperty.Name);
+                    foreach (JToken item in jobject.Children())
+                    {
+                        JProperty jProperty = (JProperty)item;
+                        dt.Columns.Add(jProperty.Name);
+                    }
+                    DataRow dr = dt.NewRow();
+                    foreach (JToken item2 in jobject.Children())
+                    {
+                        JProperty jProperty2 = (JProperty)item2;
+                        dr[jProperty2.Name] = jProperty2.Value;
+                    }
+                    dt.Rows.Add(dr);
                 }
-                DataRow dr = dt.NewRow();
-                foreach (JToken item2 in jobject.Children())
-                {
-                    JProperty jProperty2 = item2 as JProperty;
-                    dr[jProperty2.Name] = jProperty2.Value;
-                }
-                dt.Rows.Add(dr);
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JobjectToDataTable_1=>" + ex);
+            }
         }
         /// <summary>
         /// Jobject转DataTable
@@ -407,24 +574,31 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JobjectToDataTable(string jsonStr)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            DataTable dt = new DataTable();
-            if (jobject != null)
+            try
             {
-                foreach (JToken item in jobject.Children())
+                JObject jobject = JObject.Parse(jsonStr);
+                DataTable dt = new DataTable();
+                if (jobject != null)
                 {
-                    JProperty jProperty = item as JProperty;
-                    dt.Columns.Add(jProperty.Name);
+                    foreach (JToken item in jobject.Children())
+                    {
+                        JProperty jProperty = (JProperty)item;
+                        dt.Columns.Add(jProperty.Name);
+                    }
+                    DataRow dr = dt.NewRow();
+                    foreach (JToken item2 in jobject.Children())
+                    {
+                        JProperty jProperty2 = (JProperty)item2;
+                        dr[jProperty2.Name] = jProperty2.Value;
+                    }
+                    dt.Rows.Add(dr);
                 }
-                DataRow dr = dt.NewRow();
-                foreach (JToken item2 in jobject.Children())
-                {
-                    JProperty jProperty2 = item2 as JProperty;
-                    dr[jProperty2.Name] = jProperty2.Value;
-                }
-                dt.Rows.Add(dr);
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JobjectToDataTable_1=>" + ex);
+            }
         }
 
         /// <summary>
@@ -435,21 +609,28 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JobjectToDataTable(JObject jobject, params string[] keyNames)
         {
-            DataTable dt = new DataTable();
-            if (jobject != null)
+            try
             {
-                foreach (var keyName in keyNames)
+                DataTable dt = new DataTable();
+                if (jobject != null)
                 {
-                    dt.Columns.Add(keyName);
+                    foreach (var keyName in keyNames)
+                    {
+                        dt.Columns.Add(keyName);
+                    }
+                    DataRow dr = dt.NewRow();
+                    foreach (var keyName in keyNames)
+                    {
+                        dr[keyName] = jobject.SelectToken(keyName);
+                    }
+                    dt.Rows.Add(dr);
                 }
-                DataRow dr = dt.NewRow();
-                foreach (var keyName in keyNames)
-                {
-                    dr[keyName] = jobject.SelectToken(keyName);
-                }
-                dt.Rows.Add(dr);
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JobjectToDataTable_2=>" + ex);
+            }
         }
         /// <summary>
         /// Jobject指定多个节点转DataTable
@@ -459,22 +640,29 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JobjectToDataTable(string jsonStr, params string[] keyNames)
         {
-            JObject jobject = JObject.Parse(jsonStr);
-            DataTable dt = new DataTable();
-            if (jobject != null)
+            try
             {
-                foreach (var keyName in keyNames)
+                JObject jobject = JObject.Parse(jsonStr);
+                DataTable dt = new DataTable();
+                if (jobject != null)
                 {
-                    dt.Columns.Add(keyName);
+                    foreach (var keyName in keyNames)
+                    {
+                        dt.Columns.Add(keyName);
+                    }
+                    DataRow dr = dt.NewRow();
+                    foreach (var keyName in keyNames)
+                    {
+                        dr[keyName] = jobject.SelectToken(keyName);
+                    }
+                    dt.Rows.Add(dr);
                 }
-                DataRow dr = dt.NewRow();
-                foreach (var keyName in keyNames)
-                {
-                    dr[keyName] = jobject.SelectToken(keyName);
-                }
-                dt.Rows.Add(dr);
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JobjectToDataTable=>" + ex);
+            }
         }
 
         /// <summary>
@@ -485,24 +673,31 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JArrayToDataTable(JArray jArray, params string[] keyNames)
         {
-            DataTable dt = new DataTable();
-            if (jArray.Count > 0)
+            try
             {
-                foreach (var keyName in keyNames)
+                DataTable dt = new DataTable();
+                if (jArray.Count > 0)
                 {
-                    dt.Columns.Add(keyName);
-                }
-                foreach (JToken item in jArray)
-                {
-                    DataRow dr = dt.NewRow();
                     foreach (var keyName in keyNames)
                     {
-                        dr[keyName] = item.SelectToken(keyName);
+                        dt.Columns.Add(keyName);
                     }
-                    dt.Rows.Add(dr);
+                    foreach (JToken item in jArray)
+                    {
+                        DataRow dr = dt.NewRow();
+                        foreach (var keyName in keyNames)
+                        {
+                            dr[keyName] = item.SelectToken(keyName);
+                        }
+                        dt.Rows.Add(dr);
+                    }
                 }
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JArrayToDataTable_2=>" + ex);
+            }
         }
 
         /// <summary>
@@ -512,28 +707,35 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static DataTable JArrayToDataTable(JArray jArray)
         {
-            DataTable dt = new DataTable();
-            if (jArray.Count > 0)
+            try
             {
-                JObject jObject = JObject.Parse(jArray[0].ToString());
-                foreach (JToken item in jObject.Children())
+                DataTable dt = new DataTable();
+                if (jArray.Count > 0)
                 {
-                    JProperty jProperty = item as JProperty;
-                    dt.Columns.Add(jProperty.Name);
-                }
-                foreach (JToken item in jArray)
-                {
-                    JObject jObject2 = JObject.Parse(item.ToString());
-                    DataRow dr = dt.NewRow();
-                    foreach (JToken item2 in jObject2.Children())
+                    JObject jObject = JObject.Parse(jArray[0].ToString());
+                    foreach (JToken item in jObject.Children())
                     {
-                        JProperty jProperty2 = item2 as JProperty;
-                        dr[jProperty2.Name] = jProperty2.Value;
+                        JProperty jProperty = (JProperty)item;
+                        dt.Columns.Add(jProperty.Name);
                     }
-                    dt.Rows.Add(dr);
+                    foreach (JToken item in jArray)
+                    {
+                        JObject jObject2 = JObject.Parse(item.ToString());
+                        DataRow dr = dt.NewRow();
+                        foreach (JToken item2 in jObject2.Children())
+                        {
+                            JProperty jProperty2 = (JProperty)item2;
+                            dr[jProperty2.Name] = jProperty2.Value;
+                        }
+                        dt.Rows.Add(dr);
+                    }
                 }
+                return dt;
             }
-            return dt;
+            catch (Exception ex)
+            {
+                throw new Exception("JArrayToDataTable_1=>" + ex);
+            }
         }
 
         /// <summary>
@@ -544,19 +746,26 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         private static JToken? GetNextNode(JToken jtoken, string keyName)
         {
-            if (jtoken == null)
+            try
             {
+                if (jtoken == null)
+                {
+                    return null;
+                }
+                if (jtoken is JObject)
+                {
+                    JObject jObject = (JObject)jtoken;
+                    if (jObject.ContainsKey(keyName))
+                    {
+                        return jObject[keyName];
+                    }
+                }
                 return null;
             }
-            if (jtoken is JObject)
+            catch (Exception ex)
             {
-                JObject jObject = (JObject)jtoken;
-                if (jObject.ContainsKey(keyName))
-                {
-                    return jObject[keyName];
-                }
+                throw new Exception("GetNextNode=>" + ex);
             }
-            return null;
         }
     }
 }
