@@ -98,6 +98,54 @@ namespace Damon_ToolCollect
             byte[] bytes = Encoding.UTF8.GetBytes(str);
             return BytesToHexString(bytes);
         }
+        /// <summary>
+        /// 格式化 十六进制字符串,每16个字节换行
+        /// </summary>
+        /// <param name="hexString"></param>
+        /// <param name="bytesPerLine"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static string FormatHexStringWithLineBreaks(string hexString, int bytesPerLine = 16)
+        {
+            if (string.IsNullOrEmpty(hexString))
+                return string.Empty;
+
+            hexString = hexString.Replace(" ", "");
+            if (hexString.Length % 2 != 0)
+            {
+                throw new ArgumentException("输入的十六进制字符串长度必须是偶数。");
+            }
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hexString.Length; i += 2)
+            {
+                if (i > 0)
+                {
+                    // 换行逻辑：每 bytesPerLine 组换行
+                    if (i % (bytesPerLine * 2) == 0)
+                        result.AppendLine();
+                    else
+                        result.Append(" ");
+                }
+                result.Append(hexString.Substring(i, 2));
+            }
+
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// 十六进制倒置
+        /// </summary>
+        /// <param name="hex"></param>
+        /// <returns></returns>
+        public static string ReverseHexString(string hex)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = hex.Length - 2; i >= 0; i -= 2)
+            {
+                sb.Append(hex.Substring(i, 2));
+            }
+            return sb.ToString();
+        }
 
         /// <summary>
         /// Json中的十六进制字符串转换为正常字符串

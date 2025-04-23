@@ -30,6 +30,12 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            radio_base64_hex_jm = new RadioButton();
+            radio_base64_hex_bm = new RadioButton();
+            radio_base64_jm = new RadioButton();
+            radio_base64_bm = new RadioButton();
+            radio_url_jm = new RadioButton();
+            radio_url_bm = new RadioButton();
             radio_grpc_1f_jy = new RadioButton();
             radio_grpc_1f_ys = new RadioButton();
             radio_ProtoBuf_fxlh = new RadioButton();
@@ -50,6 +56,8 @@
             文件ToolStripMenuItem = new ToolStripMenuItem();
             编辑ToolStripMenuItem = new ToolStripMenuItem();
             示例数据ToolStripMenuItem = new ToolStripMenuItem();
+            radio_hex_dz = new RadioButton();
+            radio_hex_jkg = new RadioButton();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -72,6 +80,14 @@
             // tabPage1
             // 
             tabPage1.BackColor = SystemColors.Menu;
+            tabPage1.Controls.Add(radio_hex_dz);
+            tabPage1.Controls.Add(radio_hex_jkg);
+            tabPage1.Controls.Add(radio_base64_hex_jm);
+            tabPage1.Controls.Add(radio_base64_hex_bm);
+            tabPage1.Controls.Add(radio_base64_jm);
+            tabPage1.Controls.Add(radio_base64_bm);
+            tabPage1.Controls.Add(radio_url_jm);
+            tabPage1.Controls.Add(radio_url_bm);
             tabPage1.Controls.Add(radio_grpc_1f_jy);
             tabPage1.Controls.Add(radio_grpc_1f_ys);
             tabPage1.Controls.Add(radio_ProtoBuf_fxlh);
@@ -86,6 +102,72 @@
             tabPage1.Size = new Size(1244, 70);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "逆向工具";
+            // 
+            // radio_base64_hex_jm
+            // 
+            radio_base64_hex_jm.AutoSize = true;
+            radio_base64_hex_jm.Location = new Point(641, 39);
+            radio_base64_hex_jm.Name = "radio_base64_hex_jm";
+            radio_base64_hex_jm.Size = new Size(119, 21);
+            radio_base64_hex_jm.TabIndex = 13;
+            radio_base64_hex_jm.Text = "Base64_Hex解码";
+            radio_base64_hex_jm.UseVisualStyleBackColor = true;
+            radio_base64_hex_jm.CheckedChanged += radio_base64_hex_jm_CheckedChanged;
+            // 
+            // radio_base64_hex_bm
+            // 
+            radio_base64_hex_bm.AutoSize = true;
+            radio_base64_hex_bm.Location = new Point(641, 12);
+            radio_base64_hex_bm.Name = "radio_base64_hex_bm";
+            radio_base64_hex_bm.Size = new Size(119, 21);
+            radio_base64_hex_bm.TabIndex = 12;
+            radio_base64_hex_bm.Text = "Base64_Hex编码";
+            radio_base64_hex_bm.UseVisualStyleBackColor = true;
+            radio_base64_hex_bm.CheckedChanged += radio_base64_hex_bm_CheckedChanged;
+            // 
+            // radio_base64_jm
+            // 
+            radio_base64_jm.AutoSize = true;
+            radio_base64_jm.Location = new Point(538, 39);
+            radio_base64_jm.Name = "radio_base64_jm";
+            radio_base64_jm.Size = new Size(97, 21);
+            radio_base64_jm.TabIndex = 11;
+            radio_base64_jm.Text = "Base64_解码";
+            radio_base64_jm.UseVisualStyleBackColor = true;
+            radio_base64_jm.CheckedChanged += radio_base64_jm_CheckedChanged;
+            // 
+            // radio_base64_bm
+            // 
+            radio_base64_bm.AutoSize = true;
+            radio_base64_bm.Location = new Point(538, 12);
+            radio_base64_bm.Name = "radio_base64_bm";
+            radio_base64_bm.Size = new Size(97, 21);
+            radio_base64_bm.TabIndex = 10;
+            radio_base64_bm.Text = "Base64_编码";
+            radio_base64_bm.UseVisualStyleBackColor = true;
+            radio_base64_bm.CheckedChanged += radio_base64_bm_CheckedChanged;
+            // 
+            // radio_url_jm
+            // 
+            radio_url_jm.AutoSize = true;
+            radio_url_jm.Location = new Point(460, 39);
+            radio_url_jm.Name = "radio_url_jm";
+            radio_url_jm.Size = new Size(72, 21);
+            radio_url_jm.TabIndex = 9;
+            radio_url_jm.Text = "Url_解码";
+            radio_url_jm.UseVisualStyleBackColor = true;
+            radio_url_jm.CheckedChanged += radio_url_jm_CheckedChanged;
+            // 
+            // radio_url_bm
+            // 
+            radio_url_bm.AutoSize = true;
+            radio_url_bm.Location = new Point(460, 12);
+            radio_url_bm.Name = "radio_url_bm";
+            radio_url_bm.Size = new Size(72, 21);
+            radio_url_bm.TabIndex = 8;
+            radio_url_bm.Text = "Url_编码";
+            radio_url_bm.UseVisualStyleBackColor = true;
+            radio_url_bm.CheckedChanged += radio_url_bm_CheckedChanged;
             // 
             // radio_grpc_1f_jy
             // 
@@ -114,9 +196,9 @@
             radio_ProtoBuf_fxlh.AutoSize = true;
             radio_ProtoBuf_fxlh.Location = new Point(203, 39);
             radio_ProtoBuf_fxlh.Name = "radio_ProtoBuf_fxlh";
-            radio_ProtoBuf_fxlh.Size = new Size(125, 21);
+            radio_ProtoBuf_fxlh.Size = new Size(123, 21);
             radio_ProtoBuf_fxlh.TabIndex = 5;
-            radio_ProtoBuf_fxlh.Text = "ProtoBuf反序列化";
+            radio_ProtoBuf_fxlh.Text = "ProtoBuf--序列化";
             radio_ProtoBuf_fxlh.UseVisualStyleBackColor = true;
             radio_ProtoBuf_fxlh.CheckedChanged += radio_ProtoBuf_fxlh_CheckedChanged;
             // 
@@ -281,6 +363,28 @@
             示例数据ToolStripMenuItem.Name = "示例数据ToolStripMenuItem";
             示例数据ToolStripMenuItem.Size = new Size(124, 22);
             示例数据ToolStripMenuItem.Text = "示例数据";
+            示例数据ToolStripMenuItem.Click += 示例数据ToolStripMenuItem_Click;
+            // 
+            // radio_hex_dz
+            // 
+            radio_hex_dz.AutoSize = true;
+            radio_hex_dz.Location = new Point(766, 39);
+            radio_hex_dz.Name = "radio_hex_dz";
+            radio_hex_dz.Size = new Size(89, 21);
+            radio_hex_dz.TabIndex = 15;
+            radio_hex_dz.Text = "Hex_4_倒置";
+            radio_hex_dz.UseVisualStyleBackColor = true;
+            // 
+            // radio_hex_jkg
+            // 
+            radio_hex_jkg.AutoSize = true;
+            radio_hex_jkg.Location = new Point(766, 12);
+            radio_hex_jkg.Name = "radio_hex_jkg";
+            radio_hex_jkg.Size = new Size(89, 21);
+            radio_hex_jkg.TabIndex = 14;
+            radio_hex_jkg.Text = "Hex_加空格";
+            radio_hex_jkg.UseVisualStyleBackColor = true;
+            radio_hex_jkg.CheckedChanged += radio_hex_jkg_CheckedChanged;
             // 
             // FormTool
             // 
@@ -336,5 +440,13 @@
         private ToolStripMenuItem 文件ToolStripMenuItem;
         private ToolStripMenuItem 编辑ToolStripMenuItem;
         private ToolStripMenuItem 示例数据ToolStripMenuItem;
+        private RadioButton radio_url_jm;
+        private RadioButton radio_url_bm;
+        private RadioButton radio_base64_jm;
+        private RadioButton radio_base64_bm;
+        private RadioButton radio_base64_hex_jm;
+        private RadioButton radio_base64_hex_bm;
+        private RadioButton radio_hex_dz;
+        private RadioButton radio_hex_jkg;
     }
 }

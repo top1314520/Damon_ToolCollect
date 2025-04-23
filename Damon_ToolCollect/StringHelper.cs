@@ -105,6 +105,50 @@ namespace Damon_ToolCollect
             // 返回从v1到v2（不包括v2）的子串  
             return str.Substring(startIndex, endIndex - startIndex);
         }
+        /// <summary>
+        /// 去除字符串中的空格
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string RemoveSpaces(string str)
+        {
+            return str.Replace(" ", "");
+        }
+        /// <summary>
+        /// 去除字符串中的换行符
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string RemoveNewLines(string str)
+        {
+            return str.Replace("\r", "").Replace("\n", "");
+        }
+
+        /// <summary>
+        /// 计算字符串长度
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static int GetStringLength(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return 0;
+            }
+            int length = 0;
+            foreach (char c in str)
+            {
+                if (c > 127) // 如果是非ASCII字符
+                {
+                    length += 2; // 非ASCII字符占用2个字节
+                }
+                else
+                {
+                    length += 1; // ASCII字符占用1个字节
+                }
+            }
+            return length;
+        }
 
     }
 }

@@ -17,11 +17,20 @@ namespace Damon_ToolCollect
         /// </summary>
         /// <param name="hexStr"></param>
         /// <returns></returns>
-        public static string ParseAndFormatProtobuf(string hexStr)
+        public static string ParseAndFormatProtobuf(string hexStr,bool isReduce = false)
         {
             byte[] bytes = HexHelper.HexStringToBytes(hexStr);
-            var parsedData = Parse(bytes);
-            return FormatProtobuf(parsedData);
+            if (isReduce)
+            {
+                var parsedData = ParseWithRetry(bytes, Parse);
+                return FormatProtobuf(parsedData);
+            }
+            else
+            {
+                var parsedData = Parse(bytes);
+                return FormatProtobuf(parsedData);
+            }
+            
         }
         /// <summary>
         /// 检查是否为protobuf数据
@@ -42,6 +51,27 @@ namespace Damon_ToolCollect
             }
         }
 
+        public static T ParseWithRetry<T>(byte[] bytes, Func<byte[], T> parseFunc)
+        {
+            while (bytes.Length > 0)
+            {
+                try
+                {
+                    return parseFunc(bytes); // 尝试解析
+                }
+                catch (Exception) // 捕获解析异常
+                {
+                    if (bytes.Length == 0)
+                        throw; // 如果已经没有字节可删，抛出异常
+
+                    // 删除最后一个字节（复制前 n-1 个字节）
+                    byte[] newBytes = new byte[bytes.Length - 1];
+                    Array.Copy(bytes, 0, newBytes, 0, bytes.Length - 1);
+                    bytes = newBytes;
+                }
+            }
+            throw new InvalidOperationException("无法解析数据：所有字节已删除，但仍解析失败。");
+        }
         /// <summary>
         /// 解析入口
         /// </summary>
