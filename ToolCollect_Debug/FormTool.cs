@@ -37,7 +37,6 @@ namespace ToolCollect_Debug
             label_segment.Visible = true; // 显示线
             this.Controls.Add(label_segment); // 添加到窗体控件集合中                   
             #endregion
-
         }
         /// <summary>
         /// Json解压(格式化)
@@ -52,8 +51,21 @@ namespace ToolCollect_Debug
                 {
                     if (!JsonHelper.IsJson(this.textBox_output.Text))
                     {
-                        outputprompt.Text = "不是Json数据";
+                        List<string> retList = JsonHelper.ExtractAllValidJsonStrings(this.textBox_output.Text); //支持提取多个Json
+                        if (retList.Count <= 0)
+                        {
+                            outputprompt.Text = "不是Json数据";
+                            return;
+                        }
+                        string retStr = "";
+                        for (int i = 0; i < retList.Count; i++)
+                        {
+                            retStr += JobjectHelper.FormatJson(retList[i]) + Environment.NewLine;
+                        }
+                        this.textBox_output.Text = retStr;
+                        outputprompt.Text = " ";
                         return;
+
                     }
                     this.textBox_output.Text = JobjectHelper.FormatJson(this.textBox_output.Text);
                     outputprompt.Text = " ";
@@ -77,7 +89,19 @@ namespace ToolCollect_Debug
                 {
                     if (!JsonHelper.IsJson(this.textBox_output.Text))
                     {
-                        outputprompt.Text = "不是Json数据";
+                        List<string> retList = JsonHelper.ExtractAllValidJsonStrings(this.textBox_output.Text); //支持提取多个Json
+                        if (retList.Count <= 0)
+                        {
+                            outputprompt.Text = "不是Json数据";
+                            return;
+                        }
+                        string retStr = "";
+                        for (int i = 0; i < retList.Count; i++)
+                        {
+                            retStr += JobjectHelper.GetJson(retList[i]) + Environment.NewLine;
+                        }
+                        this.textBox_output.Text = retStr;
+                        outputprompt.Text = " ";
                         return;
                     }
                     this.textBox_output.Text = JobjectHelper.GetJson(this.textBox_output.Text);
@@ -364,6 +388,51 @@ namespace ToolCollect_Debug
                 textBox_output.Text = "ChZjb20uZ29vZ2xlLmFuZHJvaWQuZ21zEP2C2ncaKQoWTWFwc0NvcmVEeW5hbWl0ZS5pbnRlZxoPMjUwNjI1NDAwMTAwNDAwIAEgAiADIAUoAigBOAE=";
                 radio_base64_hex_jm.Checked = false;
             }
+            else if (radio_hex_jkg.Checked)
+            {
+                textBox_output.Text = "0a16636f6d2e676f6f676c652e616e64726f69642e676d7310fd82da771a290a164d617073436f726544796e616d6974652e696e7465671a0f3235303632353430303130303430302001200220032005280228"; // Hello World!
+                radio_hex_jkg.Checked = false;
+            }
+            else if (radio_hex_dz.Checked)
+            {
+                textBox_output.Text = "0a16636f6d2e676f6f676c652e616e64726f69642e676d7310fd82da771a290a164d617073436f726544796e616d6974652e696e7465671a0f3235303632353430303130303430302001200220032005280228"; // Hello World!
+                radio_hex_dz.Checked = false;
+            }
+            else if (radio_789_ys.Checked)
+            {
+                textBox_output.Text = "0a16636f6d2e676f6f676c652e616e64726f69642e676d7310fd82da771a290a164d617073436f726544796e616d6974652e696e7465671a0f3235303632353430303130303430302001200220032005280228";
+                radio_789_ys.Checked = false;
+            }
+            else if (radio_789_jy.Checked)
+            {
+                textBox_output.Text = "789CE3124BCECFD54BCFCF4FCF49D54BCC4B29CACF4CD14BCF2D16F8DB74AB5C4A934BCC37B1A0D839BF28D5A5322F3137B324552F33AF24355D8ADFC8D4C0CCC8D4C4C0C0D0C000482A302A3029302BB06A30690000A83F185F"; // Hello World!
+                radio_789_jy.Checked = false;
+            }
+            else if (radio_Str_qkg.Checked)
+            {
+                textBox_output.Text = "Hello World!";
+                radio_Str_qkg.Checked = false;
+            }
+            else if (radio_Str_qhh.Checked)
+            {
+                textBox_output.Text = "Hello\r\nWorld!";
+                radio_Str_qhh.Checked = false;
+            }
+            else if (radio_dump_hex.Checked)
+            {
+                textBox_output.Text = "00000000  0a 16 63 6f 6d 2e 67 6f 67 6c 65 2e 61 6e 64 72   |..com.google.andr|\r\n" +
+                                      "00000010  6f 69 64 2e 67 6d 73 10 fd 82 da 77 1a 29 0a 16   |oid.gms...w.)...|\r\n" +
+                                      "00000020  d6 f4 d7 a3 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2   |.................|\r\n" +
+                                      "00000030  c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2   |.................|\r\n" +
+                                      "00000040  c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2 c4 b2   |.................|\r\n" +
+                                      "00000050";
+                radio_dump_hex.Checked = false;
+            }
+            else if (radio_thrift_jx.Checked)
+            {
+                textBox_output.Text = "8221010d676574436f6e746163747356321c1918217566333133613233653337666537303834396464663661323462386436396234631a051200151000";
+                radio_thrift_jx.Checked = false;
+            }
         }
         /// <summary>
         /// Url编码
@@ -416,6 +485,12 @@ namespace ToolCollect_Debug
             {
                 try
                 {
+                    if (JsonHelper.IsJson(this.textBox_output.Text))
+                    {
+                        this.textBox_output.Text = JsonBase64Helper.EncodeHexToBase64InJson(this.textBox_output.Text);
+                        outputprompt.Text = "";
+                        return;
+                    }
                     this.textBox_output.Text = Base64Helper.Base64_Encode(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
@@ -436,6 +511,13 @@ namespace ToolCollect_Debug
             {
                 try
                 {
+                    if (JsonHelper.IsJson(this.textBox_output.Text))
+                    {
+                        this.textBox_output.Text = JsonBase64Helper.DecodeBase64InJson(this.textBox_output.Text);
+                        outputprompt.Text = "";
+                        return;
+                    }
+
                     this.textBox_output.Text = Base64Helper.Base64_Decode(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
@@ -456,6 +538,12 @@ namespace ToolCollect_Debug
             {
                 try
                 {
+                    if (JsonHelper.IsJson(this.textBox_output.Text))
+                    {
+                        this.textBox_output.Text = JsonBase64Helper.EncodeHexToBase64InJson(this.textBox_output.Text);
+                        outputprompt.Text = "";
+                        return;
+                    }
                     this.textBox_output.Text = Base64Helper.HexToBase64(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
@@ -476,6 +564,12 @@ namespace ToolCollect_Debug
             {
                 try
                 {
+                    if (JsonHelper.IsJson(this.textBox_output.Text))
+                    {
+                        this.textBox_output.Text = JsonBase64Helper.DecodeBase64InJson(this.textBox_output.Text);
+                        outputprompt.Text = "";
+                        return;
+                    }
                     this.textBox_output.Text = Base64Helper.Base64ToHex(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
@@ -496,7 +590,147 @@ namespace ToolCollect_Debug
             {
                 try
                 {
-                    this.textBox_output.Text = HexHelper.FormatHexStringWithLineBreaks(this.textBox_output.Text,16);
+                    this.textBox_output.Text = HexHelper.FormatHexStringWithLineBreaks(this.textBox_output.Text, 16);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 十六进制倒置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_hex_dz_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_hex_dz.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = HexHelper.ReverseHexString(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 789数据压缩
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_789_ys_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_789_ys.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = WinRAR_789_DataHelper.compress(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 789数据解压
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_789_jy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_789_jy.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = WinRAR_789_DataHelper.decompress(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 去字符串空格
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_Str_qkg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_Str_qkg.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = StringHelper.RemoveSpaces(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 去字符串换行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_Str_qhh_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_Str_qhh.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = StringHelper.RemoveNewLines(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// Dump格式数据转十六进制字符串
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_dump_hex_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_dump_hex.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = HexHelper.ExtractHexData_Dump(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_thrift_jx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_thrift_jx.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = ThriftHelper.ThriftUnPackToJson(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
                 catch (Exception ex)

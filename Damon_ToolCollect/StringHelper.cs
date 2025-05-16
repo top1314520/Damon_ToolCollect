@@ -123,7 +123,15 @@ namespace Damon_ToolCollect
         {
             return str.Replace("\r", "").Replace("\n", "");
         }
-
+        /// <summary>
+        /// 判断字符串长度是否为偶数
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsEvenLength(string str)
+        {
+            return str.Length % 2 == 0;
+        }
         /// <summary>
         /// 计算字符串长度
         /// </summary>

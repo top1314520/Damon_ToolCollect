@@ -51,6 +51,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "ApacheThrift": {
+              "target": "Package",
+              "version": "[0.21.0, )"
+            },
             "Google.Protobuf": {
               "target": "Package",
               "version": "[3.30.2, )"
@@ -58,6 +62,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "zlib.net": {
+              "target": "Package",
+              "version": "[1.0.4, )"
             }
           },
           "imports": [

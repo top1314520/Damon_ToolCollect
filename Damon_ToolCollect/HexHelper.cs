@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Damon_ToolCollect
@@ -48,7 +49,26 @@ namespace Damon_ToolCollect
             }
             catch (Exception ex)
             {
-                throw new Exception("BytesToHexString失败:" + ex.Message);
+                throw new Exception("BytesToHexString=>" + ex.Message);
+            }
+            return hexString;
+        }
+        public static string BytesToHexString(byte[] bytes, int length)
+        {
+            string hexString = "";
+            try
+            {
+                if (bytes != null)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+                        hexString += bytes[i].ToString("x2");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("BytesToHexString=>" + ex.Message);
             }
             return hexString;
         }
@@ -64,7 +84,9 @@ namespace Damon_ToolCollect
             try
             {
                 if ((hex.Length % 2) != 0)
+                {
                     hex += " ";
+                }
                 bytes = new byte[hex.Length / 2];
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -108,7 +130,9 @@ namespace Damon_ToolCollect
         public static string FormatHexStringWithLineBreaks(string hexString, int bytesPerLine = 16)
         {
             if (string.IsNullOrEmpty(hexString))
-                return string.Empty;
+            {
+                throw new ArgumentException("ReverseHexString=>输入的十六进制字符串不能为空。");
+            }
 
             hexString = hexString.Replace(" ", "");
             if (hexString.Length % 2 != 0)
@@ -139,12 +163,46 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string ReverseHexString(string hex)
         {
+            if (string.IsNullOrEmpty(hex))
+            {
+                throw new ArgumentException("ReverseHexString=>输入的十六进制字符串不能为空。");
+            }
+            if (hex.Length % 2 != 0)
+            {
+                throw new ArgumentException("输入的十六进制字符串长度必须是偶数。");
+            }
             StringBuilder sb = new StringBuilder();
             for (int i = hex.Length - 2; i >= 0; i -= 2)
             {
                 sb.Append(hex.Substring(i, 2));
             }
             return sb.ToString();
+        }
+        /// <summary>
+        /// 从十六进制转储格式中提取纯十六进制字符串
+        /// </summary>
+        /// <param name="hexDump">hexdump 格式的字符串</param>
+        /// <returns>连续的十六进制数据（无空格、无偏移量、无ASCII部分）</returns>
+        public static string ExtractHexData_Dump(string hexDump)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(hexDump))
+                {
+                    throw new ArgumentException("ExtractHexData_Dump=>输入的数据不能为空。");
+                }
+                // 使用正则表达式匹配所有十六进制字节（如 "82"、"21"、"0d"）
+                var hexBytes = Regex.Matches(hexDump, @"\b[0-9a-fA-F]{2}\b")
+                                    .Cast<Match>()
+                                    .Select(m => m.Value.ToLower()) // 统一转为小写
+                                    .ToArray();
+                // 合并所有匹配的十六进制字节
+                return string.Join("", hexBytes);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ExtractHexData_Dump=>"+ex.Message);
+            }
         }
 
         /// <summary>
