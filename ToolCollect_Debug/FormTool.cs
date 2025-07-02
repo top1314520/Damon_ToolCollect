@@ -720,7 +720,7 @@ namespace ToolCollect_Debug
             }
         }
         /// <summary>
-        /// 
+        /// thrift 数据解析
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -731,6 +731,44 @@ namespace ToolCollect_Debug
                 try
                 {
                     this.textBox_output.Text = ThriftHelper.ThriftUnPackToJson(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// xml解压
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_xml_jy_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// xml压缩
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_xml_ys_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// thrift tbinary解析
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_thrift_tbinary_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_thrift_tbinary.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = ThriftHelper.retThrift_TBinary(this.textBox_output.Text);
                     outputprompt.Text = "";
                 }
                 catch (Exception ex)

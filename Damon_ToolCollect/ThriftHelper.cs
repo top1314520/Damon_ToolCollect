@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thrift.Protocol;
+using Thrift.Protocol.Entities;
 using Thrift.Transport.Client;
 
 namespace Damon_ToolCollect
@@ -17,7 +18,7 @@ namespace Damon_ToolCollect
         /// <param name="jsonStr"></param>
         /// <returns></returns>
         /// <exception cref="AggregateException"></exception>
-        private static string retThriftResult(string jsonStr)
+        public static string retThriftResult(string jsonStr)
         {
             try
             {
@@ -47,7 +48,27 @@ namespace Damon_ToolCollect
                 throw new AggregateException("retThriftResult=>反序列化失败=>" + ex.Message);
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hexStr"></param>
+        /// <returns></returns>
+        public static string retThrift_TBinary(string hexStr)
+        {
+            try
+            {
+                byte[] thriftData = HexHelper.HexStringToBytes(hexStr);
+                ThriftBinaryParser thriftBinaryParser = new ThriftBinaryParser(thriftData);
+                Dictionary<short,object> result = thriftBinaryParser.Parse();
+                string jsonStr = JsonConvert.SerializeObject(result);
+                return jsonStr;
+            }
+            catch (Exception ex)
+            {
+                throw new AggregateException("retThrift_TBinary=>反序列化失败=>" + ex.Message);
+            }
+        }
+    
         /// <summary>
         /// 
         /// </summary>

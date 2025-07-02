@@ -53,11 +53,13 @@
             radio_Str_HexStr = new RadioButton();
             radio_hex_str = new RadioButton();
             tabPage2 = new TabPage();
+            radio_thrift_tbinary = new RadioButton();
+            radio_thrift_jx = new RadioButton();
             radio_json_ys = new RadioButton();
             radio_json_jy = new RadioButton();
             tabPage3 = new TabPage();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
+            radio_xml_ys = new RadioButton();
+            radio_xml_jy = new RadioButton();
             groupBox1 = new GroupBox();
             textBox_output = new TextBox();
             statusStrip1 = new StatusStrip();
@@ -67,8 +69,7 @@
             文件ToolStripMenuItem = new ToolStripMenuItem();
             编辑ToolStripMenuItem = new ToolStripMenuItem();
             示例数据ToolStripMenuItem = new ToolStripMenuItem();
-            radioButton4 = new RadioButton();
-            radio_thrift_jx = new RadioButton();
+            radioButton1 = new RadioButton();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -127,9 +128,9 @@
             radioButton3.AutoSize = true;
             radioButton3.Location = new Point(1032, 39);
             radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(83, 21);
+            radioButton3.Size = new Size(62, 21);
             radioButton3.TabIndex = 21;
-            radioButton3.Text = "Str_未实现";
+            radioButton3.Text = "未实现";
             radioButton3.UseVisualStyleBackColor = true;
             // 
             // radio_dump_hex
@@ -366,7 +367,8 @@
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.Menu;
-            tabPage2.Controls.Add(radioButton4);
+            tabPage2.Controls.Add(radioButton1);
+            tabPage2.Controls.Add(radio_thrift_tbinary);
             tabPage2.Controls.Add(radio_thrift_jx);
             tabPage2.Controls.Add(radio_json_ys);
             tabPage2.Controls.Add(radio_json_jy);
@@ -376,6 +378,28 @@
             tabPage2.Size = new Size(1244, 70);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "数据解析";
+            // 
+            // radio_thrift_tbinary
+            // 
+            radio_thrift_tbinary.AutoSize = true;
+            radio_thrift_tbinary.Location = new Point(91, 39);
+            radio_thrift_tbinary.Name = "radio_thrift_tbinary";
+            radio_thrift_tbinary.Size = new Size(128, 21);
+            radio_thrift_tbinary.TabIndex = 4;
+            radio_thrift_tbinary.Text = "Thrift_TBinary解析";
+            radio_thrift_tbinary.UseVisualStyleBackColor = true;
+            radio_thrift_tbinary.CheckedChanged += radio_thrift_tbinary_CheckedChanged;
+            // 
+            // radio_thrift_jx
+            // 
+            radio_thrift_jx.AutoSize = true;
+            radio_thrift_jx.Location = new Point(91, 12);
+            radio_thrift_jx.Name = "radio_thrift_jx";
+            radio_thrift_jx.Size = new Size(109, 21);
+            radio_thrift_jx.TabIndex = 3;
+            radio_thrift_jx.Text = "Thrift_数据解析";
+            radio_thrift_jx.UseVisualStyleBackColor = true;
+            radio_thrift_jx.CheckedChanged += radio_thrift_jx_CheckedChanged;
             // 
             // radio_json_ys
             // 
@@ -402,33 +426,35 @@
             // tabPage3
             // 
             tabPage3.BackColor = SystemColors.Menu;
-            tabPage3.Controls.Add(radioButton1);
-            tabPage3.Controls.Add(radioButton2);
+            tabPage3.Controls.Add(radio_xml_ys);
+            tabPage3.Controls.Add(radio_xml_jy);
             tabPage3.Location = new Point(4, 26);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(1244, 70);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "数据转换";
             // 
-            // radioButton1
+            // radio_xml_ys
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(9, 39);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(76, 21);
-            radioButton1.TabIndex = 4;
-            radioButton1.Text = "Json压缩";
-            radioButton1.UseVisualStyleBackColor = true;
+            radio_xml_ys.AutoSize = true;
+            radio_xml_ys.Location = new Point(9, 39);
+            radio_xml_ys.Name = "radio_xml_ys";
+            radio_xml_ys.Size = new Size(72, 21);
+            radio_xml_ys.TabIndex = 4;
+            radio_xml_ys.Text = "Xml压缩";
+            radio_xml_ys.UseVisualStyleBackColor = true;
+            radio_xml_ys.CheckedChanged += radio_xml_ys_CheckedChanged;
             // 
-            // radioButton2
+            // radio_xml_jy
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(9, 12);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(76, 21);
-            radioButton2.TabIndex = 3;
-            radioButton2.Text = "Json解压";
-            radioButton2.UseVisualStyleBackColor = true;
+            radio_xml_jy.AutoSize = true;
+            radio_xml_jy.Location = new Point(9, 12);
+            radio_xml_jy.Name = "radio_xml_jy";
+            radio_xml_jy.Size = new Size(72, 21);
+            radio_xml_jy.TabIndex = 3;
+            radio_xml_jy.Text = "Xml解压";
+            radio_xml_jy.UseVisualStyleBackColor = true;
+            radio_xml_jy.CheckedChanged += radio_xml_jy_CheckedChanged;
             // 
             // groupBox1
             // 
@@ -504,26 +530,15 @@
             示例数据ToolStripMenuItem.Text = "示例数据";
             示例数据ToolStripMenuItem.Click += 示例数据ToolStripMenuItem_Click;
             // 
-            // radioButton4
+            // radioButton1
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new Point(91, 39);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new Size(76, 21);
-            radioButton4.TabIndex = 4;
-            radioButton4.Text = "Json压缩";
-            radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radio_thrift_jx
-            // 
-            radio_thrift_jx.AutoSize = true;
-            radio_thrift_jx.Location = new Point(91, 12);
-            radio_thrift_jx.Name = "radio_thrift_jx";
-            radio_thrift_jx.Size = new Size(109, 21);
-            radio_thrift_jx.TabIndex = 3;
-            radio_thrift_jx.Text = "Thrift_数据解析";
-            radio_thrift_jx.UseVisualStyleBackColor = true;
-            radio_thrift_jx.CheckedChanged += radio_thrift_jx_CheckedChanged;
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(206, 12);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(62, 21);
+            radioButton1.TabIndex = 5;
+            radioButton1.Text = "未实现";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // FormTool
             // 
@@ -594,11 +609,12 @@
         private RadioButton radio_Str_qhh;
         private RadioButton radio_Str_qkg;
         private TabPage tabPage3;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton radio_xml_ys;
+        private RadioButton radio_xml_jy;
         private RadioButton radioButton3;
         private RadioButton radio_dump_hex;
-        private RadioButton radioButton4;
+        private RadioButton radio_thrift_tbinary;
         private RadioButton radio_thrift_jx;
+        private RadioButton radioButton1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,7 @@ namespace Damon_ToolCollect
             {
                 return string.Empty;
             }
+            input = input.Replace("-", "+").Replace("_", "/");
             byte[] bytes = Convert.FromBase64String(input);
             return Encoding.UTF8.GetString(bytes);
         }
@@ -49,6 +51,7 @@ namespace Damon_ToolCollect
             {
                 return string.Empty;
             }
+            base64 = base64.Replace("-", "+").Replace("_", "/"); 
             byte[] bytes = Convert.FromBase64String(base64);
             StringBuilder hex = new StringBuilder(bytes.Length * 2);
             foreach (byte b in bytes)
