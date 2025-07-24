@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj": {}
+    "H:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj": {}
   },
   "projects": {
-    "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj": {
+    "H:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj",
+        "projectUniqueName": "H:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj",
         "projectName": "Damon_ToolCollect",
-        "projectPath": "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj",
-        "packagesPath": "C:\\Users\\top\\.nuget\\packages\\",
-        "outputPath": "G:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\obj\\",
+        "projectPath": "H:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\Damon_ToolCollect.csproj",
+        "packagesPath": "C:\\Users\\A\\.nuget\\packages\\",
+        "outputPath": "H:\\程序开发\\MYProject\\ServerCode\\Project_OpenSource\\Damon_ToolCollect\\Damon_ToolCollect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\top\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\A\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net6.0": {
@@ -84,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

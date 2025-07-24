@@ -433,6 +433,21 @@ namespace ToolCollect_Debug
                 textBox_output.Text = "8221010d676574436f6e746163747356321c1918217566333133613233653337666537303834396464663661323462386436396234631a051200151000";
                 radio_thrift_jx.Checked = false;
             }
+            else if (radio_thrift_tbinary.Checked)
+            {
+                textBox_output.Text = "0C00010B000100000013313933353532383339303933303633363830300B00020000002431623261366430322D376462622D346264362D626163622D6562383036303730613262360B000300000013313933343531343539393131393937343430310B000400000027313933343531343539393131393937343430313A313933343531343539393131393937343430310B0005000000D765794A68624763694F694A49557A49314E694A392E65794A795A5846315A584E306157356E56584E6C63694936494349784F544D304E5445304E546B354D5445354F5463304E44417849697767496E4A6C59326C776157567564434936494349784F544D304E5445304E546B354D5445354F5463304E44417849697767496E5A6862476C6B55326C755932564E5532566A496A6F67496A45334E4455344F4451344D4441774D44416966512E7A316E63756A7A39654E31714133786957334C37536E42514D5A52514B666C32367A5F6F2D7244415F4B6F0B00060000000D313735303330303930333433340C00070C00010B0064000000566BE99037C5DE25F54BDEEEFAE89277EEBD6C0798B2B7C779F2AA7E10033A41D915FEB4892E80AF266B8B42F55E590598318F8B24976CE709EC65BF1B53DDD8CD51978E5972ED086964502C3233BB93007AD45792C1C90B00650000000D31373530323938383834303730020066000A0068000001978610482A0000080008000000000000";
+                radio_thrift_tbinary.Checked = false;
+            }
+            else if (radio_str_zy.Checked)
+            {
+                textBox_output.Text = "{\"region\":\"英国\",\"resourceCode\":\"1104\",\"resourceName\":\"ipweb-am-short\",\"ip\":\"gate3.ipweb.cc\",\"port\":7778,\"username\":\"B_37676_GB___30_d86z76jxw0\",\"password\":\"ipwebAa\"}";
+                radio_str_zy.Checked = false;
+            }
+            else if (radio_str_qzy.Checked)
+            {
+                textBox_output.Text = "{\\\"region\\\":\\\"英国\\\",\\\"resourceCode\\\":\\\"1104\\\",\\\"resourceName\\\":\\\"ipweb-am-short\\\",\\\"ip\\\":\\\"gate3.ipweb.cc\\\",\\\"port\\\":7778,\\\"username\\\":\\\"B_37676_GB___30_d86z76jxw0\\\",\\\"password\\\":\\\"ipwebAa\\\"}";
+                radio_str_qzy.Checked = false;
+            }
         }
         /// <summary>
         /// Url编码
@@ -740,24 +755,6 @@ namespace ToolCollect_Debug
             }
         }
         /// <summary>
-        /// xml解压
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void radio_xml_jy_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
-        /// xml压缩
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void radio_xml_ys_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
         /// thrift tbinary解析
         /// </summary>
         /// <param name="sender"></param>
@@ -775,6 +772,108 @@ namespace ToolCollect_Debug
                 {
                     outputprompt.Text = ex.Message;
                 }
+            }
+        }
+        /// <summary>
+        /// 字符_转义(添加转义)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_str_zy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_str_zy.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = StringHelper.AddEscape(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// 字符串_去转义(移除转义)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_str_qzy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_str_qzy.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = StringHelper.RemoveEscape(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+            }
+        }
+        /// <summary>
+        /// xml_解压
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_xml_jy_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_xml_jy.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = XmlHelper.FormatNamespacedXml(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+                this.radio_xml_jy.Checked = false;
+            }
+        }
+        /// <summary>
+        /// xml_压缩
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_xml_ys_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_xml_ys.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = XmlHelper.FormatNamespacedXml(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+                this.radio_xml_ys.Checked = false;
+            }
+        }
+        /// <summary>
+        /// 测试
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 测试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string imsi = SimCardHelper.GenerateImsi("", this.textBox_output.Text);
+                string iccid = SimCardHelper.GenerateIccid("", this.textBox_output.Text);
+
+                this.textBox_output.Text = imsi + Environment.NewLine + iccid;
+                outputprompt.Text = "";
+            }
+            catch (Exception ex)
+            {
+                outputprompt.Text = ex.Message;
             }
         }
     }
