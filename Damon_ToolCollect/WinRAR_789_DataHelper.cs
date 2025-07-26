@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Damon_ToolCollect
 {
     public class WinRAR_789_DataHelper
@@ -19,7 +20,7 @@ namespace Damon_ToolCollect
             byte[] bytes = HexHelper.HexStringToBytes(strSource);
             MemoryStream outms = new MemoryStream();
             MemoryStream inms = new MemoryStream(bytes);
-            zlib.ZOutputStream outZStream = new zlib.ZOutputStream(outms, zlib.zlibConst.Z_DEFAULT_COMPRESSION);
+            ComponentAce.Compression.Libs.zlib.ZOutputStream outZStream = new ComponentAce.Compression.Libs.zlib.ZOutputStream(outms, ComponentAce.Compression.Libs.zlib.zlibConst.Z_DEFAULT_COMPRESSION);
             try
             {
                 CopyStream(inms, outZStream);
@@ -50,7 +51,7 @@ namespace Damon_ToolCollect
                 byte[] Buffer = HexHelper.HexStringToBytes(strSource);
                 MemoryStream intms = new MemoryStream(Buffer);
                 MemoryStream outms = new MemoryStream();
-                zlib.ZInputStream inZStream = new zlib.ZInputStream(intms);
+                ComponentAce.Compression.Libs.zlib.ZInputStream inZStream = new ComponentAce.Compression.Libs.zlib.ZInputStream(intms);
                 int count = strSource.Length;
                 byte[] inByteList = new byte[count * 10];
                 int i = 0;
