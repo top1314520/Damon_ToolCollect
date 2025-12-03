@@ -11,7 +11,7 @@ namespace ToolCollect_Debug
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormTool()); //FormDebug  FormTool FormToolSet
+            Application.Run(new FormTool()); //FormDebug  FormTool Form_GenerateTool
         }
     }
 }

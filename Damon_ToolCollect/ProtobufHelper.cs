@@ -10,7 +10,7 @@ namespace Damon_ToolCollect
     public class ProtobufHelper
     {
         private const int MaxRecursionDepth = 64;
-        private const int MaxHexDumpLength = 1024; // 最大十六进制输出长度
+        private const int MaxHexDumpLength = 902400; // 最大十六进制输出长度 1024
 
         /// <summary>
         /// 格式化protobuf数据

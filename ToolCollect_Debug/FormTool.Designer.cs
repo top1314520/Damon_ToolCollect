@@ -63,6 +63,8 @@
             radio_json_ys = new RadioButton();
             radio_json_jy = new RadioButton();
             tabPage3 = new TabPage();
+            radioButton2 = new RadioButton();
+            radio_jm_hmacsha1 = new RadioButton();
             groupBox1 = new GroupBox();
             textBox_output = new TextBox();
             statusStrip1 = new StatusStrip();
@@ -76,6 +78,7 @@
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             groupBox1.SuspendLayout();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -486,11 +489,34 @@
             // tabPage3
             // 
             tabPage3.BackColor = SystemColors.Menu;
+            tabPage3.Controls.Add(radioButton2);
+            tabPage3.Controls.Add(radio_jm_hmacsha1);
             tabPage3.Location = new Point(4, 26);
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(1244, 70);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "数据转换";
+            tabPage3.Text = "数据加密";
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(9, 39);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(76, 21);
+            radioButton2.TabIndex = 4;
+            radioButton2.Text = "Json压缩";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radio_sc_hmacsha1
+            // 
+            radio_jm_hmacsha1.AutoSize = true;
+            radio_jm_hmacsha1.Location = new Point(9, 12);
+            radio_jm_hmacsha1.Name = "radio_sc_hmacsha1";
+            radio_jm_hmacsha1.Size = new Size(123, 21);
+            radio_jm_hmacsha1.TabIndex = 3;
+            radio_jm_hmacsha1.Text = "生成_HMACSHA1";
+            radio_jm_hmacsha1.UseVisualStyleBackColor = true;
+            radio_jm_hmacsha1.CheckedChanged += radio_jm_hmacsha1_CheckedChanged;
             // 
             // groupBox1
             // 
@@ -516,7 +542,7 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            statusStrip1.Font = new Font("Microsoft YaHei UI", 12F);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1, outputprompt });
             statusStrip1.Location = new Point(0, 785);
             statusStrip1.Name = "statusStrip1";
@@ -562,14 +588,14 @@
             // 示例数据ToolStripMenuItem
             // 
             示例数据ToolStripMenuItem.Name = "示例数据ToolStripMenuItem";
-            示例数据ToolStripMenuItem.Size = new Size(180, 22);
+            示例数据ToolStripMenuItem.Size = new Size(124, 22);
             示例数据ToolStripMenuItem.Text = "示例数据";
             示例数据ToolStripMenuItem.Click += 示例数据ToolStripMenuItem_Click;
             // 
             // 测试ToolStripMenuItem
             // 
             测试ToolStripMenuItem.Name = "测试ToolStripMenuItem";
-            测试ToolStripMenuItem.Size = new Size(180, 22);
+            测试ToolStripMenuItem.Size = new Size(124, 22);
             测试ToolStripMenuItem.Text = "测试";
             测试ToolStripMenuItem.Click += 测试ToolStripMenuItem_Click;
             // 
@@ -593,6 +619,8 @@
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             statusStrip1.ResumeLayout(false);
@@ -650,5 +678,7 @@
         private RadioButton radio_xml_ys;
         private RadioButton radio_xml_jy;
         private ToolStripMenuItem 测试ToolStripMenuItem;
+        private RadioButton radioButton2;
+        private RadioButton radio_jm_hmacsha1;
     }
 }

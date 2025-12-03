@@ -857,6 +857,28 @@ namespace ToolCollect_Debug
             }
         }
         /// <summary>
+        /// 生成 HMACSHA1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radio_jm_hmacsha1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radio_jm_hmacsha1.Checked)
+            {
+                try
+                {
+                    this.textBox_output.Text = HmacshaHelper.HMACSHA1(this.textBox_output.Text);
+                    outputprompt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    outputprompt.Text = ex.Message;
+                }
+                this.radio_jm_hmacsha1.Checked = false;
+            }
+        }
+
+        /// <summary>
         /// 测试
         /// </summary>
         /// <param name="sender"></param>
