@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Damon_ToolCollect
@@ -53,7 +54,8 @@ namespace Damon_ToolCollect
         /// <returns></returns>
         public static string RemoveEscape(string str)
         {
-            return str.Replace("\\\\", "\\").Replace("\\\"", "\"").Replace("\\\'", "\'");
+            string ret_str = str.Replace("\\\\", "\\").Replace("\\\"", "\"").Replace("\\\'", "\'").Replace("\\r\\n", "");
+            return Regex.Replace(ret_str,"[\r\n]","");
         }
         /// <summary>
         /// 字符串截取(字符串和字符串之间的内容)
